@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h1>Tất cả các bài viết</h1><br>
+
+{% for i in range(0, posts | length) %}
+  <p>
+  <div class="home-summ">
+    <small class="home-meta">{{ posts[i].date }}</small>
+    <br>
+    <small class="home-meta right">
+      tags: 
+      {% for element in posts[i].tags %} 
+        <a href="tags/{{ element }}.html" style="text-decoration: none; color: orchid;">{{ element }}</a>
+      {% endfor %}
+    </small>
+  </div>
+    <h2>
+      <a href="../posts/{{ posts[i].name }}.html" style="text-decoration: none; color: orangered">
+        {{ posts[i].title }}
+      </a>
+    </h2>
+    <small>
+      {{ posts[i].summary }}
+    </small>
+  </p>
+{% endfor %}
+{% endblock %}

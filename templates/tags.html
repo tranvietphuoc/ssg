@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h1>Các bài viết trong tag: <span style="color: lightgray;">{{ tag | upper }}</span></h1>
+<br>
+
+{% for post in posts %}
+  <p>
+  <div class="home-summ">
+    <small class="home-meta">{{ post.date }}</small>
+    <br>
+    <small class="home-meta right">tags: 
+      {% for tag in  post.tags %}
+      <a href="../tags/{{ tag }}.html" style="text-decoration: none; color: orchid;">
+        {{ tag }}
+      </a>
+      {% endfor %}
+    </small>
+  </div>
+    <h3>
+      <a href="../posts/{{ post.name }}.html" style="text-decoration: none; color: orangered">
+        {{ post.title }}
+      </a>
+    </h3>
+    <small>
+      {{ post.summary }}
+    </small>
+  </p>
+{% endfor %}
+
+{% endblock %}

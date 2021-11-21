@@ -1,0 +1,74 @@
+a:hover {
+  color: purple;
+}
+
+a:visited {
+  color: lightcoral;
+}
+
+.author-info {
+  display: flex;
+  flex-direction: row;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "droid sans mono", sans-serif;
+}
+
+.author {
+  justify-content: center;
+  text-align: center;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.scrollit {
+  float: left;
+}
+
+.post-meta {
+  justify-content: right;
+  color: gray;
+  font-size: 15px;
+}
+.post-meta > a:hover {
+  color: yellowgreen;
+}
+
+.home-meta {
+  font-size: 13px;
+  padding-top: 5px;
+  margin-bottom: 3px;
+  color: gray;
+}
+
+.home-page {
+  font-size: 2em;
+}
+
+.home-link {
+  text-decoration: none;
+  color: orchid;
+}
+
+.right {
+  padding-left: 10px;
+}
+.home-summ {
+  display: flex;
+  flex-direction: row;
+  flex-flow: row;
+}
+
+.post-content {
+  text-align: justify;
+}
+
+table,
+thead,
+tbody {
+  border: 1px solid black;
+}
