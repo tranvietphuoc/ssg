@@ -52,7 +52,11 @@ summary: ....
 	* Run `make test` to run test.
 	* Run `make run` to render all html files to `posts` and `tags` folder.
 
-* To publish your blog. Read [this guide](https://pages.github.com/)
+* Push to your repo, and go to `https://<your_github_username>.github.io/` to see.
+
+* To read more about `github pages`. Read [this guide](https://pages.github.com/)
+
 * In addition, you can add a comment plugin your self call [utterances](https://utteranc.es/?installation_id=19767855&setup_action=install). After that, go to
 `templates/post.html` and replace the script in `{% block script %}{% endblock %}` with your script.
-* Cheers.
+
+@LICENSE: [MIT](https://github.com/tvph/ssg/blob/master/LICENSE)
