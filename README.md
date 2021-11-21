@@ -10,7 +10,7 @@
 
 ## Usage
 
-* I've created a tool to render from markdown file to static site by `Python` for my self.
+* I've created a [tool](https://github.com/tvph/ssg) to render from markdown file to static site by `Python` for my self.
 * To use this template, you need to clone the repo first. The project should have this structure:
 
 ```
