@@ -16,7 +16,7 @@ install:
 	[ $(POETRY) == "poetry" ] && $(SHELL) -c "curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -"
 	@echo "Done."
 	@echo "Installing dependencies..."
-	[ $(VENV) == ".venv" ] && $(SHELL) -c "poetry install"
+	! [ $(VENV) == ".venv" ] && $(SHELL) -c "poetry install"
 	@echo "Done."
 
 
