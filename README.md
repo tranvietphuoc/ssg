@@ -1,4 +1,4 @@
-# This is a small to to render personal blog
+# This is a small tool to render personal blog
 
 ![Blog generator tool](https://github.com/tvph/ssg/actions/workflows/python-app.yml/badge.svg)
 
