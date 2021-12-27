@@ -28,6 +28,9 @@ run:
 test:
 	@poetry run pytest -vv
 
+test-rp:
+	@poetry run pytest -rP
+
 .PHONY: clean
 clean:
 	@echo "Cleaning HTML files..."
