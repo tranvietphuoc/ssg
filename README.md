@@ -59,4 +59,6 @@ summary: ....
 * In addition, you can add a comment plugin your self call [utterances](https://utteranc.es/?installation_id=19767855&setup_action=install). After that, go to
 `templates/post.html` and replace the script in `{% block script %}{% endblock %}` with your script.
 
+* You can put your information into `config.yml` file
+
 @LICENSE: [MIT](https://github.com/tvph/ssg/blob/master/LICENSE)
