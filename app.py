@@ -5,10 +5,16 @@ from pathlib import Path
 from datetime import datetime
 import typing as t
 from concurrent.futures import ThreadPoolExecutor
+import yaml
 
 
 # read markdown file then write to a dict
 def create_posts(root_path: Path):
+
+    # load yml info
+    with open(root_path.joinpath("config.yml"), "r") as f:
+        info = yaml.load(f, Loader=yaml.FullLoader)
+
     posts = {}
 
     paths = root_path.joinpath("prototypes").resolve()
@@ -29,7 +35,6 @@ def create_posts(root_path: Path):
             )
 
     # return a dict with sorted following date created
-
     posts_for_rendering = {
         p: posts[p]
         for p in sorted(
@@ -55,7 +60,7 @@ def create_posts(root_path: Path):
     # convert tags from list to set
     tags = set([i for tag in tags for i in tag])
 
-    return posts_for_rendering, posts_metadata, tags
+    return posts_for_rendering, posts_metadata, tags, info
 
 
 # render homepage
@@ -64,10 +69,11 @@ def render_home(
     render_folder: Path,
     tags: t.Set[str],
     template: Template,
+    info: dict,
 ):
     """Render home.html file to root folder."""
 
-    home_html = template.render(posts=posts_metadata, tags=tags)
+    home_html = template.render(posts=posts_metadata, tags=tags, info=info)
     home_path = render_folder.joinpath("index.html").resolve()
     with open(home_path, "w") as f:
         f.write(home_html)
@@ -79,6 +85,7 @@ def render_posts(
     tags: t.Set[str],
     render_folder: Path,
     template: Template,
+    info: dict,
 ):
     """Render post_metadata['name'].html file to outputs/ folder."""
 
@@ -91,7 +98,7 @@ def render_posts(
             "tags": post_metadata["tags"],
             "content": posts[p],
         }
-        post_html = template.render(post=post_data, tags=tags)
+        post_html = template.render(post=post_data, tags=tags, info=info)
 
         # render to html files
         post_path = render_folder.joinpath(
@@ -106,6 +113,7 @@ def render_tags(
     tags: t.Set[str],
     render_folder: Path,
     template: Template,
+    info: dict,
 ):
 
     # build a dict, contains all metadata follow key is tag
@@ -121,7 +129,7 @@ def render_tags(
 
     # render to html
     for key, value in tags_data.items():
-        tag_html = template.render(posts=value, tag=key)
+        tag_html = template.render(posts=value, tag=key, info=info)
 
         tag_path = render_folder.joinpath(f"{key.lower()}.html").resolve()
         with open(tag_path, "w") as f:
@@ -133,7 +141,7 @@ if __name__ == "__main__":
     root = Path(__file__).parent.resolve()  # project's path
 
     # get all posts in ./posts/ folder
-    posts, metadata, tags = create_posts(root)
+    posts, metadata, tags, info = create_posts(root)
     # for key, value in posts.items():
     #     print(key, value.metadata)
 
@@ -144,21 +152,49 @@ if __name__ == "__main__":
     tag_template = env.get_template(name="tags.html")
 
     # render all html files
-    render_home(
-        posts_metadata=metadata,
-        render_folder=root,
-        tags=tags,
-        template=home_template,
-    )
-    render_posts(
-        posts=posts,
-        tags=tags,
-        render_folder=root.joinpath("posts").resolve(),
-        template=post_template,
-    )
-    render_tags(
-        posts_metadata=metadata,
-        tags=tags,
-        render_folder=root.joinpath("tags").resolve(),
-        template=tag_template,
-    )
+    # render_home(
+    #     posts_metadata=metadata,
+    #     render_folder=root,
+    #     tags=tags,
+    #     template=home_template,
+    #     info=info,
+    # )
+    # render_posts(
+    #     posts=posts,
+    #     tags=tags,
+    #     render_folder=root.joinpath("posts").resolve(),
+    #     template=post_template,
+    #     info=info,
+    # )
+    # render_tags(
+    #     posts_metadata=metadata,
+    #     tags=tags,
+    #     render_folder=root.joinpath("tags").resolve(),
+    #     template=tag_template,
+    #     info=info,
+    # )
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        executor.submit(
+            render_home,
+            metadata,
+            root,
+            tags,
+            home_template,
+            info,
+        )
+        executor.submit(
+            render_posts,
+            posts,
+            tags,
+            root.joinpath("posts").resolve(),
+            post_template,
+            info,
+        )
+        executor.submit(
+            render_tags,
+            metadata,
+            tags,
+            root.joinpath("tags").resolve(),
+            tag_template,
+            info,
+        )

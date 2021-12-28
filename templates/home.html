@@ -4,21 +4,21 @@
 
 {% for i in range(0, posts | length) %}
   <p>
-  <div class="home-summ">
-    <small class="home-meta">{{ posts[i].date }}</small>
-    <br>
-    <small class="home-meta right">
-      tags: 
-      {% for element in posts[i].tags %} 
-        <a href="tags/{{ element }}.html" style="text-decoration: none; color: orchid;">{{ element }}</a>
-      {% endfor %}
-    </small>
-  </div>
-    <h2>
-      <a href="../posts/{{ posts[i].name }}.html" style="text-decoration: none; color: orangered">
+    <div class="home-summ">
+      <small class="home-meta">{{ posts[i].date }}</small>
+      <br>
+      <small class="home-meta right">
+        tags: 
+        {% for element in posts[i].tags %} 
+          <a href="tags/{{ element }}.html" id="link-tags">{{ element }}</a>
+        {% endfor %}
+      </small>
+    </div>
+    <h3>
+      <a href="../posts/{{ posts[i].name }}.html" id="link-post">
         {{ posts[i].title }}
       </a>
-    </h2>
+    </h3>
     <small>
       {{ posts[i].summary }}
     </small>

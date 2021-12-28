@@ -10,57 +10,60 @@
       integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
       crossorigin="anonymous"
     />
-    <link
-      rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css"
-    />
 
     <link
       rel="stylesheet"
-      type="text/css"
-      href="//fonts.googleapis.com/css?family=Droid+Sans+Mono"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/base16/solarized-light.min.css"
+      integrity="sha512-ZW2g6Pn2pMbKSyjcA+r4Lc58kcfvOdcsTuCCTl3qz8NqVJwUtAuiN61pDoW3EEfrjwH2CPtkFWMdkzMY1idilA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Inter"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+
     <title>Phuoc's blog</title>
   </head>
   <body>
-    <br />
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-2">
-          <h1 class="home-page">
-            <a
-              style="text-decoration: none; color: orangered;"
-              href="../index.html"
-              >Trang chủ</a
-            >
-          </h1>
-        </div>
-        <div class="col-sm-10">
-          {% block content %}{% endblock %}
-        </div>
-      </div>
-    </div>
-    <br />
-    <div class="footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-4"></div>
-          <div class="col-sm-4 author">
-            <span class="text-muted"
-              >Powered by
-              <a
-                style="text-decoration: none; color: orangered;"
-                href="https://github.com/tvph"
-                >Trần Việt Phước</a
-              >
-            </span>
-          </div>
-          <div class="col-sm-4"></div>
+    <div class="main">
+      <div class="heading">
+        <a href="/"
+          ><img
+            id="home-icon"
+            src="../static/assets/pyo3.png"
+            alt="Python Trioxide"
+        /></a>
+        <div class="info">
+          <a href="{{ info['github'] }}" title="Github">
+            <i class="fab fa-github-alt"></i
+          ></a>
+          <a href="{{ info['stackoverflow'] }}" title="Stack Overflow"
+            ><i class="fab fa-stack-overflow"></i
+          ></a>
+          <a href="{{ info['linkedin'] }}" title="LinkedIn"
+            ><i class="fab fa-linkedin"></i
+          ></a>
+          <a href="mailto: {{ info['email'] }}" title="Email"
+            ><i class="fas fa-at"></i
+          ></a>
+          <a href="{{ info['resume'] }}" title="Resume"
+            ><i class="fas fa-file"></i
+          ></a>
         </div>
       </div>
+      <div id="container">
+        {% block content %}{% endblock %} {% block script %}{% endblock %}
+      </div>
     </div>
-    {% block script %}{% endblock %}
     <script src="../static/script.js" type="text/javascript"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
   </body>
 </html>
