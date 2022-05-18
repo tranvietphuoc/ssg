@@ -26,10 +26,10 @@ run:
 	@echo "Done."
 
 test:
-	@poetry run pytest -vv
+	@poetry run pytest -vv --durations=10
 
 test-rp:
-	@poetry run pytest -rP
+	@poetry run pytest -rP --durations=10
 
 .PHONY: clean
 clean:
