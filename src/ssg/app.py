@@ -155,7 +155,7 @@ def run():
         executor.submit(
             render_home,
             metadata,
-            root.parent,
+            root,
             tags,
             home_template,
             info,

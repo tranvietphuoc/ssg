@@ -1,6 +1,7 @@
 SHELL:=/bin/bash
 POETRY=$(shell command -v poetry | cut -d '/' -f 6)
 VENV=$(shell ls -la | grep '.venv' | cut -d ' ' -f 15)
+CWD = $(pwd)
 
 .PHONY: init
 init:
@@ -22,7 +23,7 @@ install:
 
 run:
 	@echo "Rendering..."
-	$(SHELL) -c "poetry run python ./src/ssg/__init__.py"
+	$(SHELL) -c "poetry run python src/ssg/__init__.py"
 	@echo "Done."
 
 test:

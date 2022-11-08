@@ -1,4 +1,4 @@
-from src.ssg.app import *
+from ssg.app import *
 
 
 if __name__ == "__main__":
