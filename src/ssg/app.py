@@ -6,6 +6,7 @@ from datetime import datetime
 import typing as t
 from concurrent.futures import ThreadPoolExecutor
 import yaml
+import click
 
 
 # read markdown file then write to a dict
@@ -136,48 +137,25 @@ def render_tags(
             f.write(tag_html)
 
 
-if __name__ == "__main__":
-    # path
-    root = Path(__file__).parent.resolve()  # project's path
-
-    # get all posts in ./posts/ folder
+@click.command()
+def run():
+    root = Path(__file__).parent.parent.parent.resolve()
     posts, metadata, tags, info = create_posts(root)
-    # for key, value in posts.items():
-    #     print(key, value.metadata)
 
-    # get template environment
-    env = Environment(loader=FileSystemLoader(searchpath="./templates"))
+    env = Environment(
+        loader=FileSystemLoader(
+            searchpath=root.joinpath("src/").joinpath("templates/")
+        )
+    )
     home_template = env.get_template(name="home.html")
     post_template = env.get_template(name="post.html")
     tag_template = env.get_template(name="tags.html")
 
-    # render all html files
-    # render_home(
-    #     posts_metadata=metadata,
-    #     render_folder=root,
-    #     tags=tags,
-    #     template=home_template,
-    #     info=info,
-    # )
-    # render_posts(
-    #     posts=posts,
-    #     tags=tags,
-    #     render_folder=root.joinpath("posts").resolve(),
-    #     template=post_template,
-    #     info=info,
-    # )
-    # render_tags(
-    #     posts_metadata=metadata,
-    #     tags=tags,
-    #     render_folder=root.joinpath("tags").resolve(),
-    #     template=tag_template,
-    #     info=info,
-    # )
     with ThreadPoolExecutor(max_workers=5) as executor:
         executor.submit(
             render_home,
             metadata,
-            root,
+            root.parent,
             tags,
             home_template,
             info,

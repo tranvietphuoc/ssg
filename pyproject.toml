@@ -1,8 +1,15 @@
 [tool.poetry]
-name = "static-site"
+name = "myssg"
 version = "0.1.0"
 description = ""
 authors = ["Tran Viet Phuoc <phuoc.finn@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/tranvietphuoc/ssg"
+packages = [
+    { include = "ssg", from = "src" }
+]
+
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -10,10 +17,15 @@ Jinja2 = "^3.0.1"
 markdown2 = "^2.4.1"
 debugpy = "^1.5.0"
 PyYAML = "^6.0"
+click = "^8.1.3"
+pytest = "^7.2.0"
 
 [tool.poetry.dev-dependencies]
-pytest = "^5.2"
+
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+my_package_cli = "src.ssg.app:run"

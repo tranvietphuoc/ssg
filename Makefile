@@ -2,10 +2,10 @@ SHELL:=/bin/bash
 POETRY=$(shell command -v poetry | cut -d '/' -f 6)
 VENV=$(shell ls -la | grep '.venv' | cut -d ' ' -f 15)
 
-
+.PHONY: init
 init:
 	@echo "Creating prototypes folder..."
-	mkdir -p prototypes && cd prototypes && touch _test.md && cd ..
+	mkdir -p prototypes && cd prototypes && touch _test.md && echo "title: test" >>_test.md && echo "date: 01-01-2021" >> _test.md && echo "tags: test" >> _test.md && echo "name: test" >> _test.md && echo "name: test" >> _test.md && echo "summary: test" >> _test.md && echo "------------" >> _test.md && echo "test" >> _test.md && cd ..
 	@echo "Creating posts and tags folder..."
 	mkdir -p posts && mkdir -p tags
 	@echo "Done."
@@ -22,7 +22,7 @@ install:
 
 run:
 	@echo "Rendering..."
-	$(SHELL) -c "poetry run python app.py"
+	$(SHELL) -c "poetry run python ./src/ssg/__init__.py"
 	@echo "Done."
 
 test:
@@ -34,7 +34,7 @@ test-rp:
 .PHONY: clean
 clean:
 	@echo "Cleaning HTML files..."
-	find . -name "*.html" -not -path "./templates/*" -exec rm -f {} \;
+	find . -name "*.html" -not -path "./src/templates/*" -exec rm -f {} \;
 	@echo "Cleaning PYC files..."
 	find . -name "*.pyc" -exec rm -f {} \;
 	@echo "Done."
