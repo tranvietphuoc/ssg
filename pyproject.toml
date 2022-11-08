@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "myssg"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["Tran Viet Phuoc <phuoc.finn@gmail.com>"]
 license = "MIT"
