@@ -10,8 +10,8 @@
 
 ## Usage
 
-* I've created a [tool](https://github.com/tvph/ssg) to render from markdown file to static site by `Python` for my self.
-* To use this template, you need to clone the repo first. The project should have this structure:
+-   I've created a [tool](https://github.com/tvph/ssg) to render from markdown file to static site by `Python` for my self.
+-   To use this template, you need to clone the repo first. The project should have this structure:
 
 ```
     |_ prototypes/       # contains .md file, you will write your posts in here.
@@ -29,13 +29,14 @@
 
 ```
 
-* Firstly, if this is the first time you use this tool:
-    * You need to `fork` this repo to your, then change the name of repo following this format: `<your_github_username>.github.io`. And cloning it to your local machine: `git clone https://github.com/...`.
-    * Then you need to create `prototypes`, `tags` and `posts` folder by run: `make init`.
+-   Firstly, if this is the first time you use this tool:
 
-* Secondly, you need to install environment to render blog. Run: `make install`.
+    -   You need to `fork` this repo to your, then change the name of repo following this format: `<your_github_username>.github.io`. And cloning it to your local machine: `git clone https://github.com/...`.
+    -   After that, you need to create `prototypes`, `tags` and `posts` folder by run: `make init`.
 
-* Then go to `prototypes` folder and write the your posts in `.md` format, edit the metadata and push them into `prototypes` folder. Notice that, the metadata of .md file you need to keep following these formats
+-   Secondly, you need to install environment to render blog. Run: `poetry install`.
+
+-   Then go to `prototypes` folder and write the your posts in `.md` format, edit the metadata and push them into `prototypes` folder. Notice that, the metadata of .md file you need to keep following these formats
 
 ```
 title: ....
@@ -43,22 +44,24 @@ date: ....
 tags: ....
 name: ....
 summary: ....
+------------------------
 ```
-* After the first time, you only need to write posts and render to html.
 
-* To render blog posts:
+-   After the first time, you only need to write posts and render to html.
 
-	* Run `make clean` to delete old html files.
-	* Run `make test` to run test.
-	* Run `make run` to render all html files to `posts` and `tags` folder.
+-   To render blog posts:
 
-* Push to your repo, and go to `https://<your_github_username>.github.io/` to see.
+    -   Run `make clean` to delete old html files.
+    -   Run `make test` to run test.
+    -   Run `make run` to render all html files to `posts` and `tags` folder.
 
-* To read more about `github pages`. Read [this guide](https://pages.github.com/)
+-   Push to your repo, and go to `https://<your_github_username>.github.io/` to see.
 
-* In addition, you can add a comment plugin your self call [utterances](https://utteranc.es/?installation_id=19767855&setup_action=install). After that, go to
-`templates/post.html` and replace the script in `{% block script %}{% endblock %}` with your script.
+-   To read more about `github pages`. Read [this guide](https://pages.github.com/)
 
-* You can put your information into `config.yml` file
+-   In addition, you can add a comment plugin your self call [utterances](https://utteranc.es/?installation_id=19767855&setup_action=install). After that, go to
+    `templates/post.html` and replace the script in `{% block script %}{% endblock %}` with your script.
+
+-   You can put your information into `config.yml` file
 
 @LICENSE: [MIT](https://github.com/tvph/ssg/blob/master/LICENSE)
